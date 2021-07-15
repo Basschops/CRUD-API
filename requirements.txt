@@ -1,0 +1,6 @@
+connexion==2.8.0
+freezegun==0.1.11
+pytest==6.2.4
+pytest-env==0.6.2
+marshmallow==3.12.2
+python-dotenv==0.18.0

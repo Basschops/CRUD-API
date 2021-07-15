@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  description: Pond5 API to CRUD Items
+  version: "1.0.0"
+  title: RESTful API for Items
+
+paths:
+  /items:
+    get:
+      operationId: api.items.search
+      description: "List items"
+      responses:
+        '200':
+          $ref: '#/components/responses/Items'
+    post:
+      operationId: api.items.post
+      description: "Create a new Item"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '204':
+          $ref: '#/components/responses/Item'
+  '/items/{id}':
+    get:
+      operationId: api.items.get
+      description: "Retrieve an item"
+      parameters:
+        - name: id
+          description: Item id
+          in: path
+          schema:
+            type: string
+            format: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Item'
+    patch:
+      operationId: api.items.update
+      description: "Update an item"
+      parameters:
+        - name: id
+          description: Item id
+          in: path
+          schema:
+            type: string
+            format: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '204':
+          $ref: '#/components/responses/Item'
+    delete:
+      operationId: api.items.delete
+      description: "Update an item"
+      parameters:
+        - name: id
+          description: Item id
+          in: path
+          schema:
+            type: string
+            format: integer
+          required: true
+      responses:
+        '204':
+          description: "Item deleted"
+
+components:
+  responses:
+    Item:
+      description: A very interesting item
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Item'
+    Items:
+      description: A very interesting item
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Items'
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 747
+          description: identifier
+          readOnly: true
+        file_name:
+          type: string
+          example: special_file.png
+          description: File name
+        media_type:
+          type: string
+          example: png
+          description: File media type
+        created_at:
+          type: string
+          format: datetime
+          example: '2020-02-12T12:12:12'
+          readOnly: true
+          description: Date of file creation
+        updated_at:
+          type: string
+          format: datetime
+          example: '2020-02-12T12:12:12'
+          readOnly: true
+          description: Date file was last modified
+    Items:
+      type: object
+      description: A list of items
+      properties:
+        count:
+          type: integer
+          example: 100
+          description: Count of the list of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'

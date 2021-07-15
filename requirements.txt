@@ -1,4 +1,5 @@
-connexion==2.8.0
+connexion[swagger-ui]==2.8.0
+SQLAlchemy==1.4.21
 freezegun==0.1.11
 pytest==6.2.4
 pytest-env==0.6.2
